@@ -22,7 +22,7 @@ class CreateHostingsTable extends Migration
             $table->decimal('price', 10, 2);
             $table->integer('disk_size');
             $table->text('note')->nullable();
-            $table->foreign('client_id')->references('clients')->on('id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
