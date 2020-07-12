@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">All Clients</h1>
+                    <h4 class="m-0 text-dark">All Clients</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <button class="btn btn-success float-right" data-toggle="modal" data-target="#create_category_modal"><i class="fas fa-plus-circle"></i> Create</button>
@@ -21,12 +21,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                            <table id="category" class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped data_table">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Phone</th>
                                         <th>Email</th>
+                                        <th>Phone</th>
                                         <th>Address</th>
                                         <th>Action</th>
                                     </tr>
@@ -34,18 +34,18 @@
                                 <tfoot>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Phone</th>
                                         <th>Email</th>
+                                        <th>Phone</th>
                                         <th>Address</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>Jahid</td>
-                                        <td>01767778333</td>
-                                        <td>suman@gmail.com</td>
-                                        <td>Baridhara, Dhaka</td>
+                                    <tr v-for="(client, key) in clients" :key="client.id">
+                                        <td>{{ client.name }}</td>
+                                        <td>{{ client.email }}</td>
+                                        <td>{{ client.phone }}</td>
+                                        <td>{{ client.address }}</td>
                                         <td>
                                             <button class="btn btn-warning" data-toggle="modal" data-target="#edit_category_modal"><i class="fas fa-pencil-alt"></i> Edit</button>
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#delete_category_modal"><i class="fas fa-trash"></i> Delete</button>
@@ -161,8 +161,26 @@
 <script>
     export default {
         name : 'Client',
+        data(){
+            return {
+                clients:{},
+            }
+        },
         mounted() {
-            document.title = this.$route.meta.title
+            document.title = this.$route.meta.title;
+            this.getClients();
+        },
+        methods:{
+            getClients(){
+                let uri = this.$base_path+'clients';
+                this.$axios.get(uri)
+                .then( (response) => {
+                   this.clients = response.data;
+                })
+                .catch( (response) => {
+                    console.log('error');
+                });
+            }
         }
     }
 </script>
