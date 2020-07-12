@@ -17,7 +17,6 @@ class CreateDomainsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('client_id');
             $table->string('domain_link');
-            $table->string('domain_link');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
