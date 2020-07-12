@@ -90,7 +90,7 @@
     export default {
         name : 'Dashboard',
         mounted() {
-            console.log('Component mounted Dashboard')
+            document.title = this.$route.meta.title
         }   
     }
 </script>
