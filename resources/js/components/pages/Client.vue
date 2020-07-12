@@ -162,7 +162,7 @@
     export default {
         name : 'Client',
         mounted() {
-            console.log('Client page');
+            document.title = this.$route.meta.title
         }
     }
 </script>
