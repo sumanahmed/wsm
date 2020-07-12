@@ -2207,6 +2207,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Client',
   data: function data() {
@@ -2224,7 +2233,6 @@ __webpack_require__.r(__webpack_exports__);
 
       var uri = this.$base_path + 'clients';
       this.$axios.get(uri).then(function (response) {
-        //console.log(response.data);
         _this.clients = response.data;
       })["catch"](function (response) {
         console.log('error');
@@ -38165,11 +38173,12 @@ var render = function() {
                 _c(
                   "table",
                   {
-                    staticClass: "table table-bordered table-striped",
-                    attrs: { id: "clientTable" }
+                    staticClass: "table table-bordered table-striped data_table"
                   },
                   [
                     _vm._m(1),
+                    _vm._v(" "),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -38177,13 +38186,13 @@ var render = function() {
                         return _c("tr", { key: client.id }, [
                           _c("td", [_vm._v(_vm._s(client.name))]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(client.phone))]),
-                          _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(client.email))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(client.phone))]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(client.address))]),
                           _vm._v(" "),
-                          _vm._m(2, true)
+                          _vm._m(3, true)
                         ])
                       }),
                       0
@@ -38197,11 +38206,11 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(3),
-    _vm._v(" "),
     _vm._m(4),
     _vm._v(" "),
-    _vm._m(5)
+    _vm._m(5),
+    _vm._v(" "),
+    _vm._m(6)
   ])
 }
 var staticRenderFns = [
@@ -38213,7 +38222,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "row mb-2" }, [
           _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("All Clients")])
+            _c("h4", { staticClass: "m-0 text-dark" }, [_vm._v("All Clients")])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-6" }, [
@@ -38244,9 +38253,27 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Phone")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tfoot", [
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Phone")]),
         _vm._v(" "),
         _c("th", [_vm._v("Address")]),
         _vm._v(" "),
