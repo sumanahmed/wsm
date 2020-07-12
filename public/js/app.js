@@ -2219,7 +2219,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Client',
   mounted: function mounted() {
-    console.log('Client page');
+    document.title = this.$route.meta.title;
   }
 });
 
@@ -2325,7 +2325,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Dashboard',
   mounted: function mounted() {
-    console.log('Component mounted Dashboard');
+    document.title = this.$route.meta.title;
   }
 });
 
@@ -54612,11 +54612,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 var routes = [{
   path: '/',
   name: 'dashboard',
-  component: _components_pages_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_pages_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+  meta: {
+    title: 'WSM - Dashboard'
+  }
 }, {
   path: '/client',
   name: 'client',
-  component: _components_pages_Client_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _components_pages_Client_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+  meta: {
+    title: 'WSM - Client'
+  }
 }];
 
 /***/ }),
