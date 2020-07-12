@@ -46,7 +46,6 @@
 		<script src="wsm/js/jquery.overlayScrollbars.min.js"></script>
 		<script src="wsm/js/adminlte.js"></script>
 		<script src="wsm/js/dashboard.js"></script>	
-
 		<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>	
 	</body>
 </html>
