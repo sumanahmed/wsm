@@ -22,7 +22,7 @@ class CreateSSLSTable extends Migration
             $table->decimal('price', 10, 2);
             $table->tinyInteger('bill_type')->default(1)->comment('1=Frist Year Free');
             $table->text('note')->nullable();
-            $table->foreign('client_id')->references('clients')->on('id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
