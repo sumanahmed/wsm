@@ -7,11 +7,17 @@ export const routes = [
 	{
         path : '/',
         name:'dashboard',
-		component: Dashboard
+		component: Dashboard,
+		meta:{
+            title:'WSM - Dashboard'
+        }
 	},
 	{
         path : '/client',
         name:'client',        
-		component: Client
+		component: Client,
+		meta:{
+            title:'WSM - Client'
+        }
 	},
 ];
