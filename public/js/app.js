@@ -2207,19 +2207,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Client',
+  data: function data() {
+    return {
+      clients: {}
+    };
+  },
   mounted: function mounted() {
     document.title = this.$route.meta.title;
+    this.getClients();
+  },
+  methods: {
+    getClients: function getClients() {
+      var _this = this;
+
+      var uri = this.$base_path + 'clients';
+      this.$axios.get(uri).then(function (response) {
+        //console.log(response.data);
+        _this.clients = response.data;
+      })["catch"](function (response) {
+        console.log('error');
+      });
+    }
   }
 });
 
@@ -38143,575 +38153,313 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-bordered table-striped",
+                    attrs: { id: "clientTable" }
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.clients, function(client, key) {
+                        return _c("tr", { key: client.id }, [
+                          _c("td", [_vm._v(_vm._s(client.name))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(client.phone))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(client.email))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(client.address))]),
+                          _vm._v(" "),
+                          _vm._m(2, true)
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _vm._m(5)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "content-header" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row mb-2" }, [
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c("h1", { staticClass: "m-0 text-dark" }, [
-                _vm._v("All Clients")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success float-right",
-                  attrs: {
-                    "data-toggle": "modal",
-                    "data-target": "#create_category_modal"
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-plus-circle" }),
-                  _vm._v(" Create")
-                ]
-              )
-            ])
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("All Clients")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success float-right",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#create_category_modal"
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-plus-circle" }),
+                _vm._v(" Create")
+              ]
+            )
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("section", { staticClass: "content" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "table",
-                    {
-                      staticClass: "table table-bordered table-striped",
-                      attrs: { id: "category" }
-                    },
-                    [
-                      _c("thead", [
-                        _c("tr", [
-                          _c("th", [_vm._v("Name")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Phone")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Email")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Address")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Action")])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tfoot", [
-                        _c("tr", [
-                          _c("th", [_vm._v("Name")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Phone")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Email")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Address")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Action")])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tbody", [
-                        _c("tr", [
-                          _c("td", [_vm._v("Jahid")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("01767778333")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("suman@gmail.com")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Baridhara, Dhaka")]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-warning",
-                                attrs: {
-                                  "data-toggle": "modal",
-                                  "data-target": "#edit_category_modal"
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "fas fa-pencil-alt" }),
-                                _vm._v(" Edit")
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger",
-                                attrs: {
-                                  "data-toggle": "modal",
-                                  "data-target": "#delete_category_modal"
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "fas fa-trash" }),
-                                _vm._v(" Delete")
-                              ]
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Phone")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
       _c(
-        "div",
+        "button",
         {
-          staticClass: "modal fade",
+          staticClass: "btn btn-warning",
           attrs: {
-            tabindex: "-1",
-            id: "create_category_modal",
-            role: "dialog",
-            "aria-labelledby": "myLargeModalLabel",
-            "aria-hidden": "true"
+            "data-toggle": "modal",
+            "data-target": "#edit_category_modal"
           }
         },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "modal-dialog modal-default",
-              attrs: { role: "document" }
-            },
-            [
-              _c("div", { staticClass: "modal-content" }, [
-                _c("form", { attrs: { action: "", method: "POST" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "modal-header bg-success text-white" },
-                    [
-                      _c(
-                        "h5",
-                        { staticClass: "modal-title text-center w-100" },
-                        [_vm._v("Create New Client")]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        staticStyle: { "margin-bottom": "5px" }
-                      },
-                      [
-                        _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Name "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "text-danger",
-                              attrs: { title: "Required" }
-                            },
-                            [_vm._v("*")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "name",
-                            placeholder: "Name",
-                            required: ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "errorName text-danger text-bold"
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        staticStyle: { "margin-bottom": "5px" }
-                      },
-                      [
-                        _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Email "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "text-danger",
-                              attrs: { title: "Required" }
-                            },
-                            [_vm._v("*")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "email",
-                            placeholder: "Email",
-                            required: ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "errorName text-danger text-bold"
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        staticStyle: { "margin-bottom": "5px" }
-                      },
-                      [
-                        _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Phone "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "text-danger",
-                              attrs: { title: "Required" }
-                            },
-                            [_vm._v("*")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "phone",
-                            placeholder: "Phone",
-                            required: ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "errorName text-danger text-bold"
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        staticStyle: { "margin-bottom": "5px" }
-                      },
-                      [
-                        _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Address "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "text-danger",
-                              attrs: { title: "Required" }
-                            },
-                            [_vm._v("*")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          staticClass: "form-control",
-                          attrs: {
-                            name: "address",
-                            placeholder: "Address..",
-                            rows: "3",
-                            required: ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "errorName text-danger text-bold"
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-footer" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: { type: "button" }
-                      },
-                      [_vm._v("Save")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: { type: "button", "data-dismiss": "modal" }
-                      },
-                      [_vm._v("Cancel")]
-                    )
-                  ])
-                ])
-              ])
-            ]
-          )
-        ]
+        [_c("i", { staticClass: "fas fa-pencil-alt" }), _vm._v(" Edit")]
       ),
       _vm._v(" "),
       _c(
-        "div",
+        "button",
         {
-          staticClass: "modal fade",
+          staticClass: "btn btn-danger",
           attrs: {
-            tabindex: "-1",
-            id: "edit_category_modal",
-            role: "dialog",
-            "aria-labelledby": "myLargeModalLabel",
-            "aria-hidden": "true"
+            "data-toggle": "modal",
+            "data-target": "#delete_category_modal"
           }
         },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "modal-dialog modal-default",
-              attrs: { role: "document" }
-            },
-            [
-              _c("div", { staticClass: "modal-content" }, [
-                _c("form", { attrs: { action: "", method: "POST" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "modal-header bg-success text-white" },
-                    [
-                      _c(
-                        "h5",
-                        { staticClass: "modal-title text-center w-100" },
-                        [_vm._v("Edit Client")]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        staticStyle: { "margin-bottom": "5px" }
-                      },
-                      [
-                        _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Name "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "text-danger",
-                              attrs: { title: "Required" }
-                            },
-                            [_vm._v("*")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "name",
-                            placeholder: "Name",
-                            required: ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "errorName text-danger text-bold"
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        staticStyle: { "margin-bottom": "5px" }
-                      },
-                      [
-                        _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Email "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "text-danger",
-                              attrs: { title: "Required" }
-                            },
-                            [_vm._v("*")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "email",
-                            placeholder: "Email",
-                            required: ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "errorName text-danger text-bold"
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        staticStyle: { "margin-bottom": "5px" }
-                      },
-                      [
-                        _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Phone "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "text-danger",
-                              attrs: { title: "Required" }
-                            },
-                            [_vm._v("*")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "phone",
-                            placeholder: "Phone",
-                            required: ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "errorName text-danger text-bold"
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-group",
-                        staticStyle: { "margin-bottom": "5px" }
-                      },
-                      [
-                        _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Address "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "text-danger",
-                              attrs: { title: "Required" }
-                            },
-                            [_vm._v("*")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          staticClass: "form-control",
-                          attrs: {
-                            name: "address",
-                            placeholder: "Address..",
-                            rows: "3",
-                            required: ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "errorName text-danger text-bold"
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-footer" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Update")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: { type: "button", "data-dismiss": "modal" }
-                      },
-                      [_vm._v("Cancel")]
-                    )
-                  ])
-                ])
-              ])
-            ]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          attrs: {
-            tabindex: "-1",
-            id: "delete_category_modal",
-            role: "dialog",
-            "aria-labelledby": "myLargeModalLabel",
-            "aria-hidden": "true"
-          }
-        },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "modal-dialog modal-default",
-              attrs: { role: "document" }
-            },
-            [
-              _c("div", { staticClass: "modal-content" }, [
+        [_c("i", { staticClass: "fas fa-trash" }), _vm._v(" Delete")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          tabindex: "-1",
+          id: "create_category_modal",
+          role: "dialog",
+          "aria-labelledby": "myLargeModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-default",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("form", { attrs: { action: "", method: "POST" } }, [
                 _c(
                   "div",
                   { staticClass: "modal-header bg-success text-white" },
                   [
                     _c("h5", { staticClass: "modal-title text-center w-100" }, [
-                      _vm._v("Delete Confirmation")
+                      _vm._v("Create New Client")
                     ])
                   ]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
-                  _c("h3", { staticClass: "text-center" }, [
-                    _vm._v("Are you sure to delete ?")
-                  ])
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Name "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-danger",
+                            attrs: { title: "Required" }
+                          },
+                          [_vm._v("*")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "name",
+                          placeholder: "Name",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Email "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-danger",
+                            attrs: { title: "Required" }
+                          },
+                          [_vm._v("*")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "email",
+                          placeholder: "Email",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Phone "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-danger",
+                            attrs: { title: "Required" }
+                          },
+                          [_vm._v("*")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "phone",
+                          placeholder: "Phone",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Address "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-danger",
+                            attrs: { title: "Required" }
+                          },
+                          [_vm._v("*")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "address",
+                          placeholder: "Address..",
+                          rows: "3",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-footer" }, [
@@ -38721,7 +38469,7 @@ var staticRenderFns = [
                       staticClass: "btn btn-success",
                       attrs: { type: "button" }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v("Save")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -38734,11 +38482,274 @@ var staticRenderFns = [
                   )
                 ])
               ])
-            ]
-          )
-        ]
-      )
-    ])
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          tabindex: "-1",
+          id: "edit_category_modal",
+          role: "dialog",
+          "aria-labelledby": "myLargeModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-default",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("form", { attrs: { action: "", method: "POST" } }, [
+                _c(
+                  "div",
+                  { staticClass: "modal-header bg-success text-white" },
+                  [
+                    _c("h5", { staticClass: "modal-title text-center w-100" }, [
+                      _vm._v("Edit Client")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Name "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-danger",
+                            attrs: { title: "Required" }
+                          },
+                          [_vm._v("*")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "name",
+                          placeholder: "Name",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Email "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-danger",
+                            attrs: { title: "Required" }
+                          },
+                          [_vm._v("*")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "email",
+                          placeholder: "Email",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Phone "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-danger",
+                            attrs: { title: "Required" }
+                          },
+                          [_vm._v("*")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "phone",
+                          placeholder: "Phone",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Address "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-danger",
+                            attrs: { title: "Required" }
+                          },
+                          [_vm._v("*")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "address",
+                          placeholder: "Address..",
+                          rows: "3",
+                          required: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Update")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          tabindex: "-1",
+          id: "delete_category_modal",
+          role: "dialog",
+          "aria-labelledby": "myLargeModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-default",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header bg-success text-white" }, [
+                _c("h5", { staticClass: "modal-title text-center w-100" }, [
+                  _vm._v("Delete Confirmation")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("h3", { staticClass: "text-center" }, [
+                  _vm._v("Are you sure to delete ?")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  { staticClass: "btn btn-success", attrs: { type: "button" } },
+                  [_vm._v("Delete")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancel")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -54118,7 +54129,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1___default.a, vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_1___default.a;
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$base_path = 'localhost:8000';
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$base_path = 'http://localhost:8000/api/';
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('App', __webpack_require__(/*! ./components/layout/App.vue */ "./resources/js/components/layout/App.vue")["default"]);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_3__["routes"],
