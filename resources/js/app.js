@@ -7,7 +7,7 @@ import {routes} from './routes';
 Vue.use(axios, VueRouter)
 
 Vue.prototype.$axios     = axios;
-Vue.prototype.$base_path = 'localhost:8000';
+Vue.prototype.$base_path = 'http://localhost:8000/api/';
 Vue.component('App', require('./components/layout/App.vue').default);
 
 const router = new VueRouter({	
