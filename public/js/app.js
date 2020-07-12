@@ -38351,7 +38351,7 @@ var staticRenderFns = [
                       },
                       [
                         _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Phone "),
+                          _vm._v("Email "),
                           _c(
                             "span",
                             {
@@ -38366,8 +38366,8 @@ var staticRenderFns = [
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            name: "phone",
-                            placeholder: "Phone",
+                            name: "email",
+                            placeholder: "Email",
                             required: ""
                           }
                         }),
@@ -38386,7 +38386,7 @@ var staticRenderFns = [
                       },
                       [
                         _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Email "),
+                          _vm._v("Phone "),
                           _c(
                             "span",
                             {
@@ -38401,8 +38401,8 @@ var staticRenderFns = [
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            name: "email",
-                            placeholder: "Email",
+                            name: "phone",
+                            placeholder: "Phone",
                             required: ""
                           }
                         }),
@@ -38553,7 +38553,7 @@ var staticRenderFns = [
                       },
                       [
                         _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Phone "),
+                          _vm._v("Email "),
                           _c(
                             "span",
                             {
@@ -38568,8 +38568,8 @@ var staticRenderFns = [
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            name: "phone",
-                            placeholder: "Phone",
+                            name: "email",
+                            placeholder: "Email",
                             required: ""
                           }
                         }),
@@ -38588,7 +38588,7 @@ var staticRenderFns = [
                       },
                       [
                         _c("label", { staticClass: "col-form-label" }, [
-                          _vm._v("Email "),
+                          _vm._v("Phone "),
                           _c(
                             "span",
                             {
@@ -38603,8 +38603,8 @@ var staticRenderFns = [
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            name: "email",
-                            placeholder: "Email",
+                            name: "phone",
+                            placeholder: "Phone",
                             required: ""
                           }
                         }),
