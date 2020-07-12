@@ -71,17 +71,17 @@
                             <label class="col-form-label">Name <span class="text-danger" title="Required">*</span></label>
                             <input type="text" class="form-control" name="name" placeholder="Name" required>
                             <span class="errorName text-danger text-bold"></span>
-                        </div>    
-
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label class="col-form-label">Phone <span class="text-danger" title="Required">*</span></label>
-                            <input type="text" class="form-control" name="phone" placeholder="Phone" required>
-                            <span class="errorName text-danger text-bold"></span>
                         </div>
 
                         <div class="form-group" style="margin-bottom: 5px;">
                             <label class="col-form-label">Email <span class="text-danger" title="Required">*</span></label>
                             <input type="text" class="form-control" name="email" placeholder="Email" required>
+                            <span class="errorName text-danger text-bold"></span>
+                        </div>    
+
+                        <div class="form-group" style="margin-bottom: 5px;">
+                            <label class="col-form-label">Phone <span class="text-danger" title="Required">*</span></label>
+                            <input type="text" class="form-control" name="phone" placeholder="Phone" required>
                             <span class="errorName text-danger text-bold"></span>
                         </div>
 
@@ -111,17 +111,17 @@
                             <label class="col-form-label">Name <span class="text-danger" title="Required">*</span></label>
                             <input type="text" class="form-control" name="name" placeholder="Name" required>
                             <span class="errorName text-danger text-bold"></span>
-                        </div>    
-
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label class="col-form-label">Phone <span class="text-danger" title="Required">*</span></label>
-                            <input type="text" class="form-control" name="phone" placeholder="Phone" required>
-                            <span class="errorName text-danger text-bold"></span>
                         </div>
 
                         <div class="form-group" style="margin-bottom: 5px;">
                             <label class="col-form-label">Email <span class="text-danger" title="Required">*</span></label>
                             <input type="text" class="form-control" name="email" placeholder="Email" required>
+                            <span class="errorName text-danger text-bold"></span>
+                        </div>    
+
+                        <div class="form-group" style="margin-bottom: 5px;">
+                            <label class="col-form-label">Phone <span class="text-danger" title="Required">*</span></label>
+                            <input type="text" class="form-control" name="phone" placeholder="Phone" required>
                             <span class="errorName text-danger text-bold"></span>
                         </div>
 
