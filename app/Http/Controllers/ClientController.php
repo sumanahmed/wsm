@@ -45,4 +45,33 @@ class ClientController extends Controller
         }
     }
 
+    //client update
+    public function update(Request $request, Client $client){
+        $validators = Validator::make($request->all(),[
+            'name'  => 'required',
+            'email'  => 'required',
+            'phone'  => 'required',
+            'address'  => 'required',
+        ]);
+        if($validators->fails()){ 
+            return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+        }else{
+            $client->name       = $request->name;
+            $client->email      = $request->email;
+            $client->phone      = $request->phone;
+            $client->address    = $request->address;
+            if($client->update()){
+                return response([
+                    'status' => 'success',
+                    'data'   => $client
+                ],201);
+            }else{
+                return response([
+                    'status' => 'error',
+                    'data'    => []
+                ], 403);
+            }
+        }
+    }
+
 }
