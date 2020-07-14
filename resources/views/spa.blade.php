@@ -25,6 +25,7 @@
 	  <link rel="stylesheet" href="wsm/css/daterangepicker.css">
 	  <!-- DataTables -->
 	  <link rel="stylesheet" href="wsm/css/dataTables.bootstrap4.css">
+	  <link rel="stylesheet" href="wsm/css/toastr.css">
 	  <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
 	  <!-- Google Font: Source Sans Pro -->
 	  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -46,6 +47,7 @@
 		<script src="wsm/js/jquery.overlayScrollbars.min.js"></script>
 		<script src="wsm/js/adminlte.js"></script>
 		<script src="wsm/js/dashboard.js"></script>	
+		<script src="wsm/js/toastr.js"></script>	
 		<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>	
 	</body>
 </html>
