@@ -8,7 +8,7 @@
                     <h4 class="m-0 text-dark">All Clients</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <button class="btn btn-success float-right" data-toggle="modal" data-target="#create_category_modal"><i class="fas fa-plus-circle"></i> Create</button>
+                    <button class="btn btn-success float-right" data-toggle="modal" data-target="#clientCreateModal"><i class="fas fa-plus-circle"></i> Create</button>
                 </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -59,7 +59,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <div class="modal fade" tabindex="-1" id="create_category_modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade" tabindex="-1" id="clientCreateModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-default" role="document">
                 <div class="modal-content">
                 <form action="" method="POST">
@@ -69,30 +69,30 @@
                     <div class="modal-body"> 
                         <div class="form-group" style="margin-bottom: 5px;">
                             <label class="col-form-label">Name <span class="text-danger" title="Required">*</span></label>
-                            <input type="text" class="form-control" name="name" placeholder="Name" required>
+                            <input type="text" class="form-control" name="name" v-model="column.name" placeholder="Name" required>
                             <span class="errorName text-danger text-bold"></span>
                         </div>
 
                         <div class="form-group" style="margin-bottom: 5px;">
                             <label class="col-form-label">Email <span class="text-danger" title="Required">*</span></label>
-                            <input type="text" class="form-control" name="email" placeholder="Email" required>
+                            <input type="text" class="form-control" name="email" v-model="column.email" placeholder="Email" required>
                             <span class="errorName text-danger text-bold"></span>
                         </div>    
 
                         <div class="form-group" style="margin-bottom: 5px;">
                             <label class="col-form-label">Phone <span class="text-danger" title="Required">*</span></label>
-                            <input type="text" class="form-control" name="phone" placeholder="Phone" required>
+                            <input type="text" class="form-control" name="phone" v-model="column.phone" placeholder="Phone" required>
                             <span class="errorName text-danger text-bold"></span>
                         </div>
 
                         <div class="form-group" style="margin-bottom: 5px;">
                             <label class="col-form-label">Address <span class="text-danger" title="Required">*</span></label>                        
-                            <textarea class="form-control" name="address" placeholder="Address.." rows="3" required=""></textarea>
+                            <textarea class="form-control" name="address" v-model="column.address" placeholder="Address.." rows="3" required=""></textarea>
                             <span class="errorName text-danger text-bold"></span>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" @click="saveClient">Save</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                     </form>
@@ -164,6 +164,12 @@
         data(){
             return {
                 clients:{},
+                column:{
+                    name:'',
+                    email:'',
+                    phone:'',
+                    address:'',
+                }
             }
         },
         mounted() {
@@ -178,6 +184,30 @@
                    this.clients = response.data;
                 })
                 .catch( (response) => {
+                    console.log('error');
+                });
+            },
+            saveClient(e){
+                e.preventDefault();
+                var form_data ={
+                    'name'   : this.column.name,
+                    'email'  : this.column.email,
+                    'phone'  : this.column.phone,
+                    'address': this.column.address,
+                }
+                let uri = this.$base_path+'clients';
+                this.$axios.post(uri, form_data)
+                .then((response) => {
+                    if(response.status == 201){
+                        this.clients.push(form_data);
+                        toastr.success('Client save successfully');
+                        $('#clientCreateModal').modal('hide');
+                    }else{
+                        toastr.warning('Sorry, something went wrong');
+                        $('#clientCreateModal').modal('hide');
+                    }
+                })
+                .catch((response) => {
                     console.log('error');
                 });
             }
