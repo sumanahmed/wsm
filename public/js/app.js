@@ -2220,7 +2220,14 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Client',
   data: function data() {
     return {
-      clients: {}
+      client: {},
+      clients: {},
+      column: {
+        name: '',
+        email: '',
+        phone: '',
+        address: ''
+      }
     };
   },
   mounted: function mounted() {
@@ -2234,6 +2241,54 @@ __webpack_require__.r(__webpack_exports__);
       var uri = this.$base_path + 'clients';
       this.$axios.get(uri).then(function (response) {
         _this.clients = response.data;
+      })["catch"](function (response) {
+        console.log('error');
+      });
+    },
+    saveClient: function saveClient(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var form_data = {
+        'name': this.column.name,
+        'email': this.column.email,
+        'phone': this.column.phone,
+        'address': this.column.address
+      };
+      var uri = this.$base_path + 'clients';
+      this.$axios.post(uri, form_data).then(function (response) {
+        if (response.status == 201) {
+          _this2.clients.push(form_data);
+
+          toastr.success('Client save successfully');
+          $('#clientCreateModal').modal('hide');
+        } else {
+          toastr.warning('Sorry, something went wrong');
+          $('#clientCreateModal').modal('hide');
+        }
+      })["catch"](function (response) {
+        console.log('error');
+      });
+    },
+    editClient: function editClient(client) {
+      this.client = client;
+    },
+    updateClient: function updateClient() {
+      var form_data = {
+        id: this.client.id,
+        name: this.client.name,
+        email: this.client.email,
+        phone: this.client.phone,
+        address: this.client.address
+      };
+      var uri = this.$base_path + 'clients/' + this.client.id;
+      this.$axios.put(uri, form_data).then(function (response) {
+        if (response.status == 201) {
+          toastr.success('Client update successfully');
+        } else {
+          toastr.console.error();
+          'Sorry, something went wrong';
+        }
       })["catch"](function (response) {
         console.log('error');
       });
@@ -38192,7 +38247,29 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(client.address))]),
                           _vm._v(" "),
-                          _vm._m(3, true)
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-warning",
+                                attrs: {
+                                  "data-toggle": "modal",
+                                  "data-target": "#editClientModal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editClient(client)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-pencil-alt" }),
+                                _vm._v(" Edit")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._m(3, true)
+                          ])
                         ])
                       }),
                       0
@@ -38206,11 +38283,453 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(4),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          tabindex: "-1",
+          id: "clientCreateModal",
+          role: "dialog",
+          "aria-labelledby": "myLargeModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-default",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("form", { attrs: { action: "", method: "POST" } }, [
+                _vm._m(4),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.column.name,
+                            expression: "column.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "name",
+                          placeholder: "Name",
+                          required: ""
+                        },
+                        domProps: { value: _vm.column.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.column, "name", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.column.email,
+                            expression: "column.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "email",
+                          placeholder: "Email",
+                          required: ""
+                        },
+                        domProps: { value: _vm.column.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.column, "email", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.column.phone,
+                            expression: "column.phone"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "phone",
+                          placeholder: "Phone",
+                          required: ""
+                        },
+                        domProps: { value: _vm.column.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.column, "phone", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _vm._m(8),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.column.address,
+                            expression: "column.address"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "address",
+                          placeholder: "Address..",
+                          rows: "3",
+                          required: ""
+                        },
+                        domProps: { value: _vm.column.address },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.column, "address", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "button", "data-dismiss": "modal" },
+                      on: { click: _vm.saveClient }
+                    },
+                    [_vm._v("Save")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
-    _vm._m(5),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          tabindex: "-1",
+          id: "editClientModal",
+          role: "dialog",
+          "aria-labelledby": "myLargeModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-default",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("form", { attrs: { action: "", method: "POST" } }, [
+                _vm._m(9),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _vm._m(10),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.client.name,
+                            expression: "client.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "name",
+                          placeholder: "Name",
+                          required: ""
+                        },
+                        domProps: { value: _vm.client.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.client, "name", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _vm._m(11),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.client.email,
+                            expression: "client.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "email",
+                          placeholder: "Email",
+                          required: ""
+                        },
+                        domProps: { value: _vm.client.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.client, "email", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _vm._m(12),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.client.phone,
+                            expression: "client.phone"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "phone",
+                          placeholder: "Phone",
+                          required: ""
+                        },
+                        domProps: { value: _vm.client.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.client, "phone", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      staticStyle: { "margin-bottom": "5px" }
+                    },
+                    [
+                      _vm._m(13),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.client.address,
+                            expression: "client.address"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "address",
+                          placeholder: "Address..",
+                          rows: "3",
+                          required: ""
+                        },
+                        domProps: { value: _vm.client.address },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.client, "address", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "errorName text-danger text-bold"
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "submit", "data-dismiss": "modal" },
+                      on: {
+                        click: function($event) {
+                          return _vm.updateClient()
+                        }
+                      }
+                    },
+                    [_vm._v("Update")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
-    _vm._m(6)
+    _vm._m(14)
   ])
 }
 var staticRenderFns = [
@@ -38232,7 +38751,7 @@ var staticRenderFns = [
                 staticClass: "btn btn-success float-right",
                 attrs: {
                   "data-toggle": "modal",
-                  "data-target": "#create_category_modal"
+                  "data-target": "#clientCreateModal"
                 }
               },
               [
@@ -38285,439 +38804,125 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-warning",
-          attrs: {
-            "data-toggle": "modal",
-            "data-target": "#edit_category_modal"
-          }
-        },
-        [_c("i", { staticClass: "fas fa-pencil-alt" }), _vm._v(" Edit")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: {
-            "data-toggle": "modal",
-            "data-target": "#delete_category_modal"
-          }
-        },
-        [_c("i", { staticClass: "fas fa-trash" }), _vm._v(" Delete")]
-      )
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-danger",
+        attrs: {
+          "data-toggle": "modal",
+          "data-target": "#delete_category_modal"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-trash" }), _vm._v(" Delete")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header bg-success text-white" }, [
+      _c("h5", { staticClass: "modal-title text-center w-100" }, [
+        _vm._v("Create New Client")
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          tabindex: "-1",
-          id: "create_category_modal",
-          role: "dialog",
-          "aria-labelledby": "myLargeModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-default",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("form", { attrs: { action: "", method: "POST" } }, [
-                _c(
-                  "div",
-                  { staticClass: "modal-header bg-success text-white" },
-                  [
-                    _c("h5", { staticClass: "modal-title text-center w-100" }, [
-                      _vm._v("Create New Client")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group",
-                      staticStyle: { "margin-bottom": "5px" }
-                    },
-                    [
-                      _c("label", { staticClass: "col-form-label" }, [
-                        _vm._v("Name "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-danger",
-                            attrs: { title: "Required" }
-                          },
-                          [_vm._v("*")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "name",
-                          placeholder: "Name",
-                          required: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "errorName text-danger text-bold"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group",
-                      staticStyle: { "margin-bottom": "5px" }
-                    },
-                    [
-                      _c("label", { staticClass: "col-form-label" }, [
-                        _vm._v("Email "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-danger",
-                            attrs: { title: "Required" }
-                          },
-                          [_vm._v("*")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "email",
-                          placeholder: "Email",
-                          required: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "errorName text-danger text-bold"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group",
-                      staticStyle: { "margin-bottom": "5px" }
-                    },
-                    [
-                      _c("label", { staticClass: "col-form-label" }, [
-                        _vm._v("Phone "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-danger",
-                            attrs: { title: "Required" }
-                          },
-                          [_vm._v("*")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "phone",
-                          placeholder: "Phone",
-                          required: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "errorName text-danger text-bold"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group",
-                      staticStyle: { "margin-bottom": "5px" }
-                    },
-                    [
-                      _c("label", { staticClass: "col-form-label" }, [
-                        _vm._v("Address "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-danger",
-                            attrs: { title: "Required" }
-                          },
-                          [_vm._v("*")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("textarea", {
-                        staticClass: "form-control",
-                        attrs: {
-                          name: "address",
-                          placeholder: "Address..",
-                          rows: "3",
-                          required: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "errorName text-danger text-bold"
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      attrs: { type: "button" }
-                    },
-                    [_vm._v("Save")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      attrs: { type: "button", "data-dismiss": "modal" }
-                    },
-                    [_vm._v("Cancel")]
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("label", { staticClass: "col-form-label" }, [
+      _vm._v("Name "),
+      _c("span", { staticClass: "text-danger", attrs: { title: "Required" } }, [
+        _vm._v("*")
+      ])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          tabindex: "-1",
-          id: "edit_category_modal",
-          role: "dialog",
-          "aria-labelledby": "myLargeModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-default",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("form", { attrs: { action: "", method: "POST" } }, [
-                _c(
-                  "div",
-                  { staticClass: "modal-header bg-success text-white" },
-                  [
-                    _c("h5", { staticClass: "modal-title text-center w-100" }, [
-                      _vm._v("Edit Client")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group",
-                      staticStyle: { "margin-bottom": "5px" }
-                    },
-                    [
-                      _c("label", { staticClass: "col-form-label" }, [
-                        _vm._v("Name "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-danger",
-                            attrs: { title: "Required" }
-                          },
-                          [_vm._v("*")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "name",
-                          placeholder: "Name",
-                          required: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "errorName text-danger text-bold"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group",
-                      staticStyle: { "margin-bottom": "5px" }
-                    },
-                    [
-                      _c("label", { staticClass: "col-form-label" }, [
-                        _vm._v("Email "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-danger",
-                            attrs: { title: "Required" }
-                          },
-                          [_vm._v("*")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "email",
-                          placeholder: "Email",
-                          required: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "errorName text-danger text-bold"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group",
-                      staticStyle: { "margin-bottom": "5px" }
-                    },
-                    [
-                      _c("label", { staticClass: "col-form-label" }, [
-                        _vm._v("Phone "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-danger",
-                            attrs: { title: "Required" }
-                          },
-                          [_vm._v("*")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "phone",
-                          placeholder: "Phone",
-                          required: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "errorName text-danger text-bold"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group",
-                      staticStyle: { "margin-bottom": "5px" }
-                    },
-                    [
-                      _c("label", { staticClass: "col-form-label" }, [
-                        _vm._v("Address "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-danger",
-                            attrs: { title: "Required" }
-                          },
-                          [_vm._v("*")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("textarea", {
-                        staticClass: "form-control",
-                        attrs: {
-                          name: "address",
-                          placeholder: "Address..",
-                          rows: "3",
-                          required: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "errorName text-danger text-bold"
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      attrs: { type: "submit" }
-                    },
-                    [_vm._v("Update")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      attrs: { type: "button", "data-dismiss": "modal" }
-                    },
-                    [_vm._v("Cancel")]
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("label", { staticClass: "col-form-label" }, [
+      _vm._v("Email "),
+      _c("span", { staticClass: "text-danger", attrs: { title: "Required" } }, [
+        _vm._v("*")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "col-form-label" }, [
+      _vm._v("Phone "),
+      _c("span", { staticClass: "text-danger", attrs: { title: "Required" } }, [
+        _vm._v("*")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "col-form-label" }, [
+      _vm._v("Address "),
+      _c("span", { staticClass: "text-danger", attrs: { title: "Required" } }, [
+        _vm._v("*")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header bg-success text-white" }, [
+      _c("h5", { staticClass: "modal-title text-center w-100" }, [
+        _vm._v("Edit Client")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "col-form-label" }, [
+      _vm._v("Name "),
+      _c("span", { staticClass: "text-danger", attrs: { title: "Required" } }, [
+        _vm._v("*")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "col-form-label" }, [
+      _vm._v("Email "),
+      _c("span", { staticClass: "text-danger", attrs: { title: "Required" } }, [
+        _vm._v("*")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "col-form-label" }, [
+      _vm._v("Phone "),
+      _c("span", { staticClass: "text-danger", attrs: { title: "Required" } }, [
+        _vm._v("*")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "col-form-label" }, [
+      _vm._v("Address "),
+      _c("span", { staticClass: "text-danger", attrs: { title: "Required" } }, [
+        _vm._v("*")
+      ])
+    ])
   },
   function() {
     var _vm = this
